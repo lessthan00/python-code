@@ -1,0 +1,18 @@
+中文名,kicad_filename,kicad_filename2,kicad_gbr,jlc_filename,jlc_begin,ad_gbr,ad_filename,hear
+顶层布线,F_Cu.gtl,.gtl,F_Cu.gbr,Gerber_TopLayer.GTL,G04 Layer: TopLayer*,Copper_Signal_Top.gbr,GTL,hear1
+底层布线,B_Cu.gbl,.gbl,B_Cu.gbr,Gerber_BottomLayer.GBL,G04 Layer: BottomLayer*,Copper_Signal_Bot.gbr,GBL,hear1
+内层1,In1_Cu.g2,.g2,In1_Cu.gbr,Gerber_InnerLayer1.G1,G04 Layer: InnerLayer1*,Copper_Signal_1.gbr,G1,hear1
+内层2,In2_Cu.g3,.g3,In2_Cu.gbr,Gerber_InnerLayer2.G2,G04 Layer: InnerLayer2*,Copper_Signal_2.gbr,G2,hear1
+内层3,In3_Cu.g4,.g4,In3_Cu.gbr,Gerber_InnerLayer3.G3,G04 Layer: InnerLayer3*,Copper_Signal_3.gbr,G3,hear1
+内层4,In4_Cu.g5,.g5,In4_Cu.gbr,Gerber_InnerLayer4.G4,G04 Layer: InnerLayer4*,Copper_Signal_4.gbr,G4,hear1
+内层5,In5_Cu.g6,.g6,In5_Cu.gbr,Gerber_InnerLayer5.G5,G04 Layer: InnerLayer5*,Copper_Signal_5.gbr,G5,hear1
+内层6,In6_Cu.g7,.g7,In6_Cu.gbr,Gerber_InnerLayer6.G6,G04 Layer: InnerLayer6*,Copper_Signal_6.gbr,G6,hear1
+顶层丝印,F_Silkscreen.gto,.gto,F_Silkscreen.gbr,Gerber_TopSilkscreenLayer.GTO,G04 Layer: TopSilkscreenLayer*,Legend_Top.gbr,GTO,hear1
+底层丝印,B_Silkscreen.gbo,.gbo,B_Silkscreen.gbr,Gerber_BottomSilkscreenLayer.GBO,G04 Layer: BottomSilkscreenLayer*,Legend_Bot.gbr,GBO,hear1
+顶层锡膏,F_Paste.gtp,.gtp,F_Paste.gbr,Gerber_TopPasteMaskLayer.GTP,G04 Layer: TopPasteMaskLayer*,Paste_Top.gbr,GTP,hear1
+底层锡膏,B_Paste.gbp,.gbp,B_Paste.gbr,Gerber_BottomPasteMaskLayer.GBP,G04 Layer: BottomPasteMaskLayer*,Paste_Bot.gbr,GBP,hear1
+顶层阻焊,F_Mask.gts,.gts,F_Mask.gbr,Gerber_TopSolderMaskLayer.GTS,G04 Layer: TopSolderMaskLayer*,Soldermask_Top.gbr,GTS,hear1
+底层阻焊,F_Mask.gbs,.gbs,F_Mask.gbr,Gerber_BottomSolderMaskLayer.GBS,G04 Layer: BottomSolderMaskLayer*,Soldermask_Bot.gbr,GBS,hear1
+外形,Edge_Cuts.gm1,.gm1,Edge_Cuts.gbr,Gerber_BoardOutlineLayer.GKO,G04 Layer: BoardOutlineLayer*,Keep-out.gbr,GKO,hear1
+非电镀通孔,NPTH.drl,NPTH.drl,NPTH.drl,Drill_NPTH_Through.DRL,;TYPE=PLATED;Layer: NPTH_Through,NPTH_Drill.gbr,GBR1,hear2
+电镀通孔,PTH.drl,PTH.drl,PTH.drl,Drill_PTH_Through.DRL,;TYPE=PLATED;Layer: PTH_Through,PTH_Drill.gbr,GBR2,hear2
