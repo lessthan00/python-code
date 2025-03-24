@@ -17,3 +17,9 @@ deactivate # 虚拟环境
 ## 再次运行时, 使用 requirements.txt 安装
 
 pip install -r requirements.txt
+
+
+deactivate  # 确保退出当前虚拟环境
+rm -rf venv  # 删除旧的虚拟环境
+python3 -m venv venv  # 创建新的虚拟环境
+source venv/bin/activate  # 激活新的虚拟环境
