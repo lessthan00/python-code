@@ -16,9 +16,11 @@ source venv/bin/activate # 激活虚拟环境
 
 ## 依赖
 pip3 install requests beautifulsoup4 pandas
+pip3 install requests fake-useragent
 
 ## 运行
 python3 download_form_yiqifuwu.py # 运行脚本
+python3 download_form_csv.py yiqifuwu_pdf_viewer_urls.csv #替换为实际保存url的csv文件名称
 
 ## 保存依赖
 pip3 freeze > requirements.txt # 管理依赖
