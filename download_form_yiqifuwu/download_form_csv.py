@@ -11,7 +11,10 @@ def sanitize_filename(filename):
     # 替换或移除非法字符（Windows和Unix都适用的通用方案）
     # 这里我们保留字母、数字、中文、下划线、连字符和点，其他替换为下划线
     # 你可以根据需要调整这个正则表达式
-    return re.sub(r'[\\/*?:"<>|]', "_", filename)
+    filename = re.sub(r'[\\/*?:"<>|]', "_", filename)  # 基本非法字符
+    filename = re.sub(r'[\/∕]', "_", filename)  # 处理正斜杠和变体
+    filename = re.sub(r'\s+', ' ', filename).strip()  # 合并多个空格
+    return filename
 
 def download_pdfs_from_csv(csv_path, output_folder=None):
     """
