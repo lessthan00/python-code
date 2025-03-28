@@ -34,3 +34,21 @@ deactivate  # 确保退出当前虚拟环境
 rm -rf venv  # 删除旧的虚拟环境
 python3 -m venv venv  # 创建新的虚拟环境
 source venv/bin/activate  # 激活新的虚拟环境
+
+## 如果需要在windows上运行
+
+```shell
+
+# 删除旧的 Linux venv（如果有）
+rm -r venv  
+
+# 创建新的 Windows 虚拟环境
+python -m venv venv  
+
+# 激活虚拟环境
+.\venv\Scripts\activate  
+
+# 安装依赖（如果有 requirements.txt）
+pip install -r requirements.txt  
+python download_form_csv.py yiqifuwu_pdf_viewer_urls.csv
+```
