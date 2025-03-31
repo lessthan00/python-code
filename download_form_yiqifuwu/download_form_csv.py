@@ -3,101 +3,121 @@ import csv
 import re
 import argparse
 import time
+import random
 import requests
-from urllib.parse import urljoin
-from fake_useragent import UserAgent
+from urllib.parse import urljoin, urlparse, parse_qs
 
 def sanitize_filename(filename):
-    # 替换或移除非法字符（Windows和Unix都适用的通用方案）
-    # 这里我们保留字母、数字、中文、下划线、连字符和点，其他替换为下划线
-    # 你可以根据需要调整这个正则表达式
-    filename = re.sub(r'[\\/*?:"<>|]', "_", filename)  # 基本非法字符
-    filename = re.sub(r'[\/∕]', "_", filename)  # 处理正斜杠和变体
-    filename = re.sub(r'\s+', ' ', filename).strip()  # 合并多个空格
+    filename = re.sub(r'[\\/*?:"<>|]', "_", filename)
+    filename = re.sub(r'[\/∕]', "_", filename)
+    filename = re.sub(r'\s+', ' ', filename).strip()
     return filename
 
+def validate_pdf(content):
+    return content[:4] == b'%PDF'
+
+def extract_real_pdf_url(viewer_url):
+    """从查看器URL中提取真实的PDF URL"""
+    parsed = urlparse(viewer_url)
+    query = parse_qs(parsed.query)
+    if 'file' in query:
+        return urljoin(f"{parsed.scheme}://{parsed.netloc}", query['file'][0])
+    return None
+
 def download_pdfs_from_csv(csv_path, output_folder=None):
-    """
-    从CSV文件下载PDF文件
-    
-    参数:
-        csv_path (str): CSV文件路径
-        output_folder (str): 输出文件夹路径，如果不指定则使用CSV文件名
-    """
-    # 设置输出文件夹
     if output_folder is None:
-        output_folder = os.path.splitext(os.path.basename(csv_path))[0]
+        output_folder = os.path.splitext(os.path.basename(csv_path))[0]  # 修正：使用basename而不是splename
     
-    # 创建输出文件夹
     os.makedirs(output_folder, exist_ok=True)
-    
-    # 初始化失败记录
     failed_downloads = []
     
-    # 读取CSV文件
     with open(csv_path, mode='r', encoding='utf-8') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         
         for row in csv_reader:
-            if row['status'].lower() != 'success':
+            if 'status' not in row or row['status'].lower() != 'success':  # 添加检查status字段是否存在
                 continue
                 
-            pdf_url = row['viewer_url']
-            # 先去除首尾空白，再过滤非法字符
+            viewer_url = row['viewer_url']
             raw_title = row['title'].strip()
             title = sanitize_filename(raw_title) + '.pdf'
             save_path = os.path.join(output_folder, title)
             
-            # 如果文件已存在，跳过
             if os.path.exists(save_path):
                 print(f"文件已存在，跳过: {title}")
                 continue
                 
-            print(f"正在下载: {title}")
+            print(f"正在处理: {title}")
             
             try:
-                # 处理相对URL
-                if not pdf_url.startswith(('http://', 'https://')):
-                    base_url = '/'.join(row['page_url'].split('/')[:3])
-                    pdf_url = urljoin(base_url, pdf_url)
+                # 提取真实PDF URL
+                pdf_url = extract_real_pdf_url(viewer_url)
+                if not pdf_url:
+                    raise Exception("无法从查看器URL中提取PDF链接")
                 
-                # 下载PDF
+                # 更真实的浏览器头信息
                 headers = {
-                    'User-Agent': UserAgent().random,
-                    'Referer': row['page_url'],
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                    'Referer': viewer_url,
                     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                    'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+                    'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+                    'Accept-Encoding': 'gzip, deflate, br',
                     'Connection': 'keep-alive',
+                    'Upgrade-Insecure-Requests': '1',
+                    'Sec-Fetch-Dest': 'document',
+                    'Sec-Fetch-Mode': 'navigate',
+                    'Sec-Fetch-Site': 'same-origin',
+                    'Sec-Fetch-User': '?1',
+                    'Cache-Control': 'max-age=0',
                 }
                 
-                # 添加延迟防止被封
-                time.sleep(2)
+                # 添加必要的cookies
+                cookies = {
+                    '__51vcke__JhsImm1MEoeBpCnP': 'd9d1698f-0544-54d9-97ed-fd7607439670',
+                    '__51vuft__JhsImm1MEoeBpCnP': str(int(time.time() * 1000)),
+                    'Hm_lvt_7dd17b942bff8da009982725a8ea9474': '1743147609,1743148284',
+                    '__51uvsct__JhsImm1MEoeBpCnP': '3'
+                }
                 
-                response = requests.get(
+                time.sleep(3 + random.random() * 2)
+                
+                session = requests.Session()
+                response = session.get(
                     pdf_url,
                     headers=headers,
+                    cookies=cookies,
                     stream=True,
-                    timeout=30
+                    timeout=60
                 )
                 
-                # 检查响应状态
-                if response.status_code == 200:
-                    with open(save_path, 'wb') as f:
-                        for chunk in response.iter_content(1024):
-                            f.write(chunk)
-                    print(f"下载成功: {title}")
-                else:
+                if response.status_code != 200:
                     raise Exception(f"HTTP状态码: {response.status_code}")
+                
+                content = response.content
+                
+                if not validate_pdf(content):
+                    if b'<html' in content[:1024].lower():
+                        raise Exception("服务器返回了HTML页面而非PDF文件")
+                    raise Exception("下载的文件不是有效的PDF格式")
+                
+                with open(save_path, 'wb') as f:
+                    f.write(content)
+                    
+                file_size = os.path.getsize(save_path)
+                if file_size < 1024:
+                    os.remove(save_path)
+                    raise Exception(f"文件过小({file_size}字节)，可能是错误页面")
+                
+                print(f"下载成功: {title} ({file_size/1024:.1f} KB)")
                     
             except Exception as e:
                 print(f"下载失败: {title} - 错误: {str(e)}")
                 failed_downloads.append({
-                    'title': title,
-                    'url': pdf_url,
+                    'title': raw_title,  # 使用原始标题而不是处理过的标题
+                    'url': pdf_url if 'pdf_url' in locals() else viewer_url,
                     'error': str(e)
                 })
     
-    # 保存失败记录
     if failed_downloads:
         failed_csv_path = os.path.join(output_folder, 'failed_downloads.csv')
         with open(failed_csv_path, 'w', encoding='utf-8', newline='') as f:
