@@ -70,3 +70,12 @@ cd kicad_ad2jlc_gerber_python
 
 如果报错,就把 make.ps1的内容复制到 powershell的命令行来运行即可
 即可获得 exe文件
+
+## make.ps1
+pip install pyinstaller
+
+# 清理之前的编译
+Remove-Item dist, build, jlc_gerber -Recurse -ErrorAction Ignore
+
+# 执行编译
+pyinstaller --onefile --name "2jlc" --add-data "GerberX2.json" --hidden-import=shutil --hidden-import=csv 2jlc.py

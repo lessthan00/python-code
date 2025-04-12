@@ -1,0 +1,25 @@
+name,jlc_filename,jlc_begin,kicad_GerberX2_Protel,kicad_filename2,kicad_gbr,ad_gbr,ad_filename
+top_layer,Gerber_TopLayer.GTL,G04 Layer: TopLayer*,F_Cu.gtl,.gtl,F_Cu.gbr,Copper_Signal_Top.gbr,GTL
+bottom_layer,Gerber_BottomLayer.GBL,G04 Layer: BottomLayer*,B_Cu.gbl,.gbl,B_Cu.gbr,Copper_Signal_Bot.gbr,GBL
+inner_layer_1,Gerber_InnerLayer1.G1,G04 Layer: InnerLayer1*,In1_Cu.g2,.g2,In1_Cu.gbr,Copper_Signal_1.gbr,G1
+inner_layer_2,Gerber_InnerLayer2.G2,G04 Layer: InnerLayer2*,In2_Cu.g3,.g3,In2_Cu.gbr,Copper_Signal_2.gbr,G2
+inner_layer_3,Gerber_InnerLayer3.G3,G04 Layer: InnerLayer3*,In3_Cu.g4,.g4,In3_Cu.gbr,Copper_Signal_3.gbr,G3
+inner_layer_4,Gerber_InnerLayer4.G4,G04 Layer: InnerLayer4*,In4_Cu.g5,.g5,In4_Cu.gbr,Copper_Signal_4.gbr,G4
+inner_layer_5,Gerber_InnerLayer5.G5,G04 Layer: InnerLayer5*,In5_Cu.g6,.g6,In5_Cu.gbr,Copper_Signal_5.gbr,G5
+inner_layer_6,Gerber_InnerLayer6.G6,G04 Layer: InnerLayer6*,In6_Cu.g7,.g7,In6_Cu.gbr,Copper_Signal_6.gbr,G6
+top_silkscreen,Gerber_TopSilkscreenLayer.GTO,G04 Layer: TopSilkscreenLayer*,F_Silkscreen.gto,.gto,F_Silkscreen.gbr,Legend_Top.gbr,GTO
+bottom_silkscreen,Gerber_BottomSilkscreenLayer.GBO,G04 Layer: BottomSilkscreenLayer*,B_Silkscreen.gbo,.gbo,B_Silkscreen.gbr,Legend_Bot.gbr,GBO
+top_paste,Gerber_TopPasteMaskLayer.GTP,G04 Layer: TopPasteMaskLayer*,F_Paste.gtp,.gtp,F_Paste.gbr,Paste_Top.gbr,GTP
+bottom_paste,Gerber_BottomPasteMaskLayer.GBP,G04 Layer: BottomPasteMaskLayer*,B_Paste.gbp,.gbp,B_Paste.gbr,Paste_Bot.gbr,GBP
+top_mask,Gerber_TopSolderMaskLayer.GTS,G04 Layer: TopSolderMaskLayer*,F_Mask.gts,.gts,F_Mask.gbr,Soldermask_Top.gbr,GTS
+bottom_mask,Gerber_BottomSolderMaskLayer.GBS,G04 Layer: BottomSolderMaskLayer*,B_Mask.gbs,.gbs,B_Mask.gbr,Soldermask_Bot.gbr,GBS
+edge_cuts,Gerber_BoardOutlineLayer.GKO,G04 Layer: BoardOutlineLayer*,Edge_Cuts.gm1,.gm1,Edge_Cuts.gbr,Keep-out.gbr,GKO
+plated_through_hole,Drill_PTH_Through.DRL,;TYPE=PLATED;Layer: PTH_Through,-PTH.drl,-PTH.drl,-PTH-drl.gbr,-PTH_Drill.gbr,GBR2
+non_plated_through_hole,Drill_NPTH_Through.DRL,;TYPE=PLATED;Layer: NPTH_Through,-NPTH.drl,-NPTH.drl,-NPTH-drl.gbr,-NPTH_Drill.gbr,GBR1
+management_layer,,,,,,Profile.gbr,GM
+fabrication_layer,Gerber_DocumentLayer.GDL,G04 Layer: DocumentLayer*,,,,Document.gbr,GM15
+top_pad_management,,,,,,Pads_Top.gbr,GPT
+bottom_pad_management,,,,,,Pads_Bot.gbr,GBT
+drill_layer,Gerber_DrillDrawingLayer.GDD,G04 Layer: DrillDrawingLayer*,,,,Drawing_1.gbr,GD1
+drill_guide_layer,,,,,,Drillmap_1.gbr,GG1
+via_layer,Drill_PTH_Through_Via.DRL,;TYPE=PLATED;Layer: PTH_Through_Via,,,,,

@@ -1,8 +1,0 @@
-中文名,kicad_filename,kicad_gbr,jlc_file_name,jlc_begin,ad_gbr,ad_filename
-管理层,,,,,Profile.gbr,GM
-制造层,,,Gerber_DocumentLayer.GDL,G04 Layer: DocumentLayer*,Document.gbr,GM15
-顶层焊盘管理,,,,,Pads_Top.gbr,GPT
-底层焊盘管理,,,,,Pads_Bot.gbr,GBT
-钻孔层,,,Gerber_DrillDrawingLayer.GDD,G04 Layer: DrillDrawingLayer*,Drawing_1.gbr,GD1
-钻孔层引导层,,,,,Drillmap_1.gbr,GG1
-过孔层,,,Drill_PTH_Through_Via.DRL,;TYPE=PLATED;Layer: PTH_Through_Via,
