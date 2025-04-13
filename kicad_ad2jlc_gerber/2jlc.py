@@ -34,7 +34,6 @@ BASE_PATH = get_exe_dir()
 PATH_FINAL = os.path.join(BASE_PATH, r'jlc_gerber')
 gerber_folder = os.path.join(BASE_PATH, r"gerber")
 timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-# zip_path = os.path.join(os.path.dirname(BASE_PATH), f"out_{BASE_PATH.name}-{timestamp}.zip")
 zip_path = os.path.join(BASE_PATH, f"out_{BASE_PATH.name}-{timestamp}.zip")
 
 def create_folder(path):
@@ -63,6 +62,17 @@ def load_json_data(file_path):
     with open(file_path, mode='r', encoding='utf-8') as file:
         data = json.load(file)
     return data
+
+def standardize_filename(filename):
+    """
+    标准化文件名：将名字部分转为小写，空格和 '-' 替换为 '_'
+    
+    :param filename: 原始文件名
+    :return: 标准化后的文件名
+    """
+    name, ext = os.path.splitext(filename)  # 分离名字和后缀
+    standardized_name = name.lower().replace(' ', '_').replace('-', '_')  # 标准化名字
+    return f"{standardized_name}{ext}"  # 拼接名字和后缀
 
 def move_and_rename_files(source_path, destination_path, old_name, new_name):
     """移动并重命名文件"""
@@ -110,10 +120,13 @@ def main():
 
         # 遍历 gerber 文件夹中的文件
         for file_name in os.listdir(gerber_folder):
-            # 检查文件名是否包含某个键值（除去 jlc_filename 和 jlc_header）
+            # 标准化文件名
+            standardized_name = standardize_filename(file_name)
+
+            # 检查标准化后的文件名是否包含某个键值（除去 jlc_filename 和 jlc_header）
             try:
                 if any(
-                    isinstance(value, str) and value in file_name  # 确保 value 是字符串
+                    isinstance(value, str) and value in standardized_name  # 确保 value 是字符串
                     for key, value in config.items()
                     if key not in ["jlc_filename", "jlc_header"]
                 ):
