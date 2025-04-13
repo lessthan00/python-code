@@ -14,6 +14,7 @@
         "to_kicad_gbr": "-Top Layer.gbr",
         "ti_ad_gbr": "top layer.gbr",
         "kicad_gbr": "-F_Cu.gbr",
+        "RS-274X": "_copper_signal_top.gbr",
         "ad_gbr": "Copper_Signal_Top.gbr",
         "ad_filename": "GTL"
         
@@ -33,6 +34,7 @@
         "to_kicad_gbr": "-Bottom Layer.gbr",
         "ti_ad_gbr": "bottom layer.gbr",
         "kicad_gbr": "-B_Cu.gbr",
+        "RS-274X": "_copper_signal_bot.gbr",
         "ad_gbr": "Copper_Signal_Bot.gbr",
         "ad_filename": "GBL"
     },
@@ -51,6 +53,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": "inner1 layer.gbr",
         "kicad_gbr": "-In1_Cu.gbr",
+        "RS-274X": null,
         "ad_gbr": "Copper_Signal_1.gbr",
         "ad_filename": "G1"
     },
@@ -69,6 +72,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": "inner2 layer.gbr",
         "kicad_gbr": "-In2_Cu.gbr",
+        "RS-274X": null,
         "ad_gbr": "Copper_Signal_2.gbr",
         "ad_filename": "G2"
     },
@@ -87,6 +91,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": "inner3 layer.gbr",
         "kicad_gbr": "-In3_Cu.gbr",
+        "RS-274X": null,
         "ad_gbr": "Copper_Signal_3.gbr",
         "ad_filename": "G3"
     },
@@ -105,6 +110,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": "inner4 layer.gbr",
         "kicad_gbr": "-In4_Cu.gbr",
+        "RS-274X": null,
         "ad_gbr": "Copper_Signal_4.gbr",
         "ad_filename": "G4"
     },
@@ -123,6 +129,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": "inner5 layer.gbr",
         "kicad_gbr": "-In5_Cu.gbr",
+        "RS-274X": null,
         "ad_gbr": "Copper_Signal_5.gbr",
         "ad_filename": "G5"
     },
@@ -141,6 +148,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": "inner6 layer.gbr",
         "kicad_gbr": "-In6_Cu.gbr",
+        "RS-274X": null,
         "ad_gbr": "Copper_Signal_6.gbr",
         "ad_filename": "G6"
     },
@@ -159,6 +167,7 @@
         "to_kicad_gbr": "-Top Overlay.gbr",
         "ti_ad_gbr": "top silkscreen.gbr",
         "kicad_gbr": "-F_Silkscreen.gbr",
+        "RS-274X": "_legend_top.gbr",
         "ad_gbr": "Legend_Top.gbr",
         "ad_filename": "GTO"
     },
@@ -177,6 +186,7 @@
         "to_kicad_gbr": "-Bottom Overlay.gbr",
         "ti_ad_gbr": "bottom silkscreen.gbr",
         "kicad_gbr": "-B_Silkscreen.gbr",
+        "RS-274X": "_legend_bot.gbr",
         "ad_gbr": "Legend_Bot.gbr",
         "ad_filename": "GBO"
     },
@@ -195,6 +205,7 @@
         "to_kicad_gbr": "-Top Paste.gbr",
         "ti_ad_gbr": "top paste mask.gbr",
         "kicad_gbr": "-F_Paste.gbr",
+        "RS-274X": "_paste_top.gbr",
         "ad_gbr": "Paste_Top.gbr",
         "ad_filename": "GTP"
     },
@@ -213,6 +224,7 @@
         "to_kicad_gbr": "-Bottom Paste.gbr",
         "ti_ad_gbr": "bottom paste mask.gbr",
         "kicad_gbr": "-B_Paste.gbr",
+        "RS-274X": "_paste_bot.gbr",
         "ad_gbr": "Paste_Bot.gbr",
         "ad_filename": "GBP"
     },
@@ -231,6 +243,7 @@
         "to_kicad_gbr": "-Top Solder.gbr",
         "ti_ad_gbr": "top solder mask.gbr",
         "kicad_gbr": "-F_Mask.gbr",
+        "RS-274X": "_soldermask_top.gbr",
         "ad_gbr": "Soldermask_Top.gbr",
         "ad_filename": "GTS"
     },
@@ -249,6 +262,7 @@
         "to_kicad_gbr": "-Bottom Solder.gbr",
         "ti_ad_gbr": "bottom solder mask.gbr",
         "kicad_gbr": "-B_Mask.gbr",
+        "RS-274X": "_soldermask_bot.gbr",
         "ad_gbr": "Soldermask_Bot.gbr",
         "ad_filename": "GBS"
     },
@@ -267,7 +281,8 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": null,
         "kicad_gbr": "-Edge_Cuts.gbr",
-        "ad_gbr": "Keep-out.gbr",
+        "RS-274X": "_mechanical_1.gbr",
+        "ad_gbr": null,
         "ad_filename": "GKO"
     },
     "plated_through_hole": {
@@ -282,6 +297,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": "drill drawing through holes.gbr",
         "kicad_gbr": "-PTH-drl.gbr",
+        "RS-274X": "_pth_drill.gbr",
         "ad_gbr": "-PTH_Drill.gbr",
         "ad_filename": "GBR2"
     },
@@ -297,6 +313,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": null,
         "kicad_gbr": "-NPTH-drl.gbr",
+        "RS-274X": "_npth_drill.gbr",
         "ad_gbr": "-NPTH_Drill.gbr",
         "ad_filename": "GBR1"
     },
@@ -308,6 +325,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": null,
         "kicad_gbr": null,
+        "RS-274X": null,
         "ad_gbr": "Profile.gbr",
         "ad_filename": "GM"
     },
@@ -319,6 +337,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": null,
         "kicad_gbr": null,
+        "RS-274X": null,
         "ad_gbr": "Document.gbr",
         "ad_filename": "GM15"
     },
@@ -330,6 +349,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": null,
         "kicad_gbr": null,
+        "RS-274X": null,
         "ad_gbr": "Pads_Top.gbr",
         "ad_filename": "GPT"
     },
@@ -341,6 +361,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": null,
         "kicad_gbr": null,
+        "RS-274X": null,
         "ad_gbr": "Pads_Bot.gbr",
         "ad_filename": "GBT"
     },
@@ -352,6 +373,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": null,
         "kicad_gbr": null,
+        "RS-274X": null,
         "ad_gbr": "Drawing_1.gbr",
         "ad_filename": "GD1"
     },
@@ -363,6 +385,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": null,
         "kicad_gbr": null,
+        "RS-274X": null,
         "ad_gbr": "Drillmap_1.gbr",
         "ad_filename": "GG1"
     },
@@ -374,6 +397,7 @@
         "to_kicad_gbr": null,
         "ti_ad_gbr": null,
         "kicad_gbr": null,
+        "RS-274X": null,
         "ad_gbr": null,
         "ad_filename": null
     }
