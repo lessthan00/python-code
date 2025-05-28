@@ -5,6 +5,7 @@ import zipfile
 import datetime
 from pathlib import Path
 import sys
+import re
 
 def get_resource_path(relative_path):
     """ 获取资源文件的绝对路径（无论是否打包） """
@@ -27,6 +28,22 @@ def get_exe_dir():
     else:
         return Path(__file__).parent  # 开发时获取脚本所在目录
 
+def get_gerber_file_prefix(gerber_folder):
+    """
+    获取 Gerber 文件夹中第一个文件的文件名前缀（以 '-' 分割的第一部分）
+    
+    参数:
+        gerber_folder (str): Gerber 文件夹路径
+    """
+    try:
+        files = os.listdir(gerber_folder)
+        if not files:  # 空文件夹
+            return None
+            
+        first_file = files[0]
+        return first_file.split('-')[0]
+
+
 # 会改变的地址,在exe外部
 BASE_PATH = get_exe_dir()
 
@@ -34,7 +51,22 @@ BASE_PATH = get_exe_dir()
 PATH_FINAL = os.path.join(BASE_PATH, r'jlc_gerber')
 gerber_folder = os.path.join(BASE_PATH, r"gerber")
 timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-zip_path = os.path.join(BASE_PATH, f"out_{BASE_PATH.name}-{timestamp}.zip")
+zip_path = os.path.join(BASE_PATH, f"out_{get_gerber_file_prefix(gerber_folder)}-{timestamp}.zip")
+
+# 获取当前时间并格式化为YYYY-MM-DD HH:MM:SS
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+def replace_timestamp_with_now(text):
+    # 定义匹配YYYY-MM-DD HH:MM:SS格式的正则表达式
+    pattern = r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}'
+    
+    # 检查字符串中是否匹配该模式
+    if re.search(pattern, text):
+        # 替换所有匹配的时间戳为当前时间
+        replaced_text = re.sub(pattern, current_time, text)
+        return replaced_text
+    else:
+        return text  # 如果没有找到匹配项，返回原字符串
 
 def create_folder(path):
     """创建目标文件夹（如果不存在）"""
@@ -86,7 +118,8 @@ def add_file_header(file_path, header_lines):
     # 读取原有内容
     with open(file_path, 'r', encoding='utf-8') as f:
         original_content = f.read()
-
+    # 修正时间
+    header_lines = replace_timestamp_with_now(header_lines)
     # 构建新内容
     new_content = "\n".join(header_lines) + "\n" + original_content
 
