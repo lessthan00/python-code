@@ -34,6 +34,9 @@ def get_gerber_file_prefix(gerber_folder):
     
     参数:
         gerber_folder (str): Gerber 文件夹路径
+        
+    返回:
+        str: 文件名前缀，如果文件夹为空则返回 None
     """
     try:
         files = os.listdir(gerber_folder)
@@ -42,6 +45,10 @@ def get_gerber_file_prefix(gerber_folder):
             
         first_file = files[0]
         return first_file.split('-')[0]
+        
+    except Exception as e:
+        print(f"Error processing gerber folder: {e}")
+        return None
 
 
 # 会改变的地址,在exe外部
@@ -54,7 +61,8 @@ timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
 zip_path = os.path.join(BASE_PATH, f"out_{get_gerber_file_prefix(gerber_folder)}-{timestamp}.zip")
 
 # 获取当前时间并格式化为YYYY-MM-DD HH:MM:SS
-current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
 
 def replace_timestamp_with_now(text):
     # 定义匹配YYYY-MM-DD HH:MM:SS格式的正则表达式
@@ -114,14 +122,18 @@ def move_and_rename_files(source_path, destination_path, old_name, new_name):
     print(f"Moved and renamed: {old_name} -> {new_name}")
 
 def add_file_header(file_path, header_lines):
-    """向文件添加头部信息"""
+    """向文件添加头部信息（支持多行）"""
     # 读取原有内容
     with open(file_path, 'r', encoding='utf-8') as f:
         original_content = f.read()
-    # 修正时间
-    header_lines = replace_timestamp_with_now(header_lines)
-    # 构建新内容
-    new_content = "\n".join(header_lines) + "\n" + original_content
+    
+    # 处理每行头部信息（逐行替换时间戳）
+    processed_header = []
+    for line in header_lines:
+        processed_header.append(replace_timestamp_with_now(line))
+    
+    # 构建新内容（添加换行符）
+    new_content = "\n".join(processed_header) + "\n" + original_content
 
     # 写入文件
     with open(file_path, 'w', encoding='utf-8') as f:
