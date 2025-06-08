@@ -149,6 +149,7 @@ def zip_folder(folder_path, output_path):
     print(f"ZIP created: {output_path}")
 
 def main():
+    wait_for_gerber_folder(gerber_folder)
     # 初始化目标文件夹
     create_folder(PATH_FINAL)
     clean_folder(PATH_FINAL)
