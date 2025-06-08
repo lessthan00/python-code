@@ -8,23 +8,6 @@ import sys
 import re
 import time
 
-def wait_for_gerber_folder(gerber_folder):
-    """
-    等待直到指定的 gerber_folder 目录存在
-    
-    参数:
-        gerber_folder (str): 要检查的目录路径
-        
-    返回:
-        None
-    """
-    while True:
-        if os.path.exists(gerber_folder):
-            print(f"目录 '{gerber_folder}' 已存在")
-            break
-        print(f"目录 '{gerber_folder}' 不存在，等待 500ms 后重试...")
-        time.sleep(0.5)  # 延迟500毫秒
-
 def get_resource_path(relative_path):
     """ 获取资源文件的绝对路径（无论是否打包） """
     if getattr(sys, 'frozen', False):
@@ -81,6 +64,22 @@ zip_path = os.path.join(BASE_PATH, f"out_{get_gerber_file_prefix(gerber_folder)}
 # 获取当前时间并格式化为YYYY-MM-DD HH:MM:SS
 current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+def wait_for_gerber_folder(gerber_folder):
+    """
+    等待直到指定的 gerber_folder 目录存在
+    
+    参数:
+        gerber_folder (str): 要检查的目录路径
+        
+    返回:
+        None
+    """
+    while True:
+        if os.path.exists(gerber_folder):
+            print(f"目录 '{gerber_folder}' 已存在")
+            break
+        print(f"目录 '{gerber_folder}' 不存在，等待 500ms 后重试...")
+        time.sleep(0.5)  # 延迟500毫秒
 
 def replace_timestamp_with_now(text):
     # 定义匹配YYYY-MM-DD HH:MM:SS格式的正则表达式
