@@ -6,6 +6,24 @@ import datetime
 from pathlib import Path
 import sys
 import re
+import time
+
+def wait_for_gerber_folder(gerber_folder):
+    """
+    等待直到指定的 gerber_folder 目录存在
+    
+    参数:
+        gerber_folder (str): 要检查的目录路径
+        
+    返回:
+        None
+    """
+    while True:
+        if os.path.exists(gerber_folder):
+            print(f"目录 '{gerber_folder}' 已存在")
+            break
+        print(f"目录 '{gerber_folder}' 不存在，等待 500ms 后重试...")
+        time.sleep(0.5)  # 延迟500毫秒
 
 def get_resource_path(relative_path):
     """ 获取资源文件的绝对路径（无论是否打包） """
@@ -150,6 +168,7 @@ def zip_folder(folder_path, output_path):
     print(f"ZIP created: {output_path}")
 
 def main():
+    wait_for_gerber_folder(gerber_folder)
     # 初始化目标文件夹
     create_folder(PATH_FINAL)
     clean_folder(PATH_FINAL)
